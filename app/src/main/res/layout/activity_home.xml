@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Home"
+    android:gravity="center_horizontal"
+    android:background="@color/back"
+    android:orientation="vertical">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        app:cardCornerRadius="20dp"
+        android:layout_marginTop="200dp"
+        app:cardBackgroundColor="@color/orange"
+        android:id="@+id/po">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Play Offline"
+                android:textColor="@android:color/white"
+                android:textSize="18dp"
+                android:textStyle="bold">
+            </TextView>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        app:cardCornerRadius="20dp"
+        android:layout_marginTop="30dp"
+        app:cardBackgroundColor="@color/colorAccent"
+        android:id="@+id/pf">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Play with friends"
+                android:textColor="@android:color/white"
+                android:textSize="18dp"
+                android:textStyle="bold">
+            </TextView>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+</LinearLayout>

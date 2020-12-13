@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "35158564123",
+    "project_id": "tisu-ludo",
+    "storage_bucket": "tisu-ludo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:35158564123:android:4b98ea6338fc3eee6607be",
+        "android_client_info": {
+          "package_name": "com.cotzero.ludo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "35158564123-9crbrnn1fetb7g8469n3523kq22v8b94.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCSH9-AEXXWxHTxNSVR3chjhq9JcUSk1Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "35158564123-9crbrnn1fetb7g8469n3523kq22v8b94.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
