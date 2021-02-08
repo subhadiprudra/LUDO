@@ -141,7 +141,6 @@
                             android:layout_rowWeight="1"
                             android:gravity="center"
                             android:id="@+id/join_btn"
-
                             />
 
                         <TextView

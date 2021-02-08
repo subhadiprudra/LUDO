@@ -53,7 +53,7 @@ public class Home extends AppCompatActivity implements TimeListener {
     }
 
     void createTable(){
-        Intent intent= new Intent(this,CreateTable.class);
+        Intent intent= new Intent(this,MainActivity.class);
         startActivity(intent);
     }
 

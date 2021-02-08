@@ -63,11 +63,12 @@ public class PositionsAndSizes {
 
 
     public int getYPix(int y){
+        int topMargin= (int) ((getDisplayHeight()-getDisplayWidth())/2);
         float boardPadding = getDisplayWidth()-(15*getOneSqureSize());
         boardPadding=boardPadding/2;
         Log.i("boardPadding",boardPadding+"");
 
-        float v=getDisplayWidth()-boardPadding+(getDisplayWidth()/3);
+        float v= (float) (getDisplayWidth()-boardPadding+(topMargin));
         float u = (float) (v-(y*getOneSqureSize()) + 0.5*getOneSqureSize());
         return (int) u;
 

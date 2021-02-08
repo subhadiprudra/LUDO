@@ -85,6 +85,7 @@ public class CreateTable extends AppCompatActivity {
         createBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 createBtn.setTextSize(18);
                 joinBtn.setTextSize(20);
                 joinLayout.setVisibility(View.GONE);
@@ -99,21 +100,20 @@ public class CreateTable extends AppCompatActivity {
             }
         });
 
+
+
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(playerCount>0){
-                    reference.child("action").setValue("start").addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            goToGame(tableCodeCreated);
-                        }
-                    });
+                    reference.child("action").setValue("start");
                 }else {
                     Toast.makeText(CreateTable.this, "No one joined", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
+
 
 
         joinGame.setOnClickListener(new View.OnClickListener() {
@@ -145,11 +145,15 @@ public class CreateTable extends AppCompatActivity {
                                 map.put("email",user.getEmail());
                                 map.put("uid",user.getUid());
                                 map.put("playerNum","0");
+                                map.put("step","0");
+                                map.put("cursor","0");
+
                                 reference.child("joined").child(user.getUid()).setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         loading.dismiss();
-                                        goToGame(tableCodeToJoin);
+                                        addStartListener();
+
                                     }
                                 });
 
@@ -193,6 +197,8 @@ public class CreateTable extends AppCompatActivity {
         map.put("email",user.getEmail());
         map.put("uid",user.getUid());
         map.put("playerNum","0");
+        map.put("step","0");
+        map.put("cursor","0");
 
         reference.child("joined").child(user.getUid()).setValue(map);
         reference.child("action").setValue("stop");
@@ -228,6 +234,24 @@ public class CreateTable extends AppCompatActivity {
         Intent intent = new Intent(CreateTable.this,MainActivity.class);
         intent.putExtra("code",code);
         startActivity(intent);
+    }
+
+    void addStartListener(){
+
+        reference.child("action").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.getValue(String.class).equals("start")){
+                    goToGame(tableCodeCreated);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
 

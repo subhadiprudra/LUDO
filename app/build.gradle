@@ -43,8 +43,10 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0-beta01'
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'com.github.anugotta:FlipTimerView:v1.5'
+
+
+
     implementation 'commons-net:commons-net:3.6'
-
-
 
 }

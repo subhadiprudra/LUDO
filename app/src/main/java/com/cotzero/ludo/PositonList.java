@@ -150,7 +150,7 @@ public class PositonList {
                 path.add(new PositionModel(7,13));
                 path.add(new PositionModel(9,14));
                 path.add(new PositionModel(13,9));
-                path.add(new PositionModel(7,14));
+                path.add(new PositionModel(14,7));
                 path.add(new PositionModel(9,3));
 
         }

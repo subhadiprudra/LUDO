@@ -152,7 +152,7 @@ public class Cursor {
 
             if (color==this.color && value && index+steps<57) {
                 canCursorGo = true;
-                int s = (int) (size + 15);
+                int s = (int) (size + 25);
                 RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(s, s);
                 relativeLayout.removeView(iv);
                 lp.setMargins(xPix - s / 2, yPix - s + (s / 6), 0, 0);
@@ -200,7 +200,7 @@ public class Cursor {
         if(canCursorGo) {
 
 
-            changeListener.onBeforeGo(color, currentX, currentY, index, cursorIndex);
+            changeListener.onBeforeGo(color, currentX, currentY, index, cursorIndex,false);
 
 
             new Thread(new Runnable() {
@@ -231,7 +231,7 @@ public class Cursor {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            changeListener.onCompleteGo(color, currentX, currentY, index, cursorIndex);
+                            changeListener.onCompleteGo(color, currentX, currentY, index, cursorIndex,false);
                         }
                     });
                 }
@@ -253,7 +253,7 @@ public class Cursor {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        changeListener.onBeforeGo(color,currentX,currentY,index,cursorIndex);
+                        changeListener.onBeforeGo(color,currentX,currentY,index,cursorIndex,true);
                     }
                 });
 
@@ -281,7 +281,7 @@ public class Cursor {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        changeListener.onCompleteGo(color,currentX,currentY,index,cursorIndex);
+                        changeListener.onCompleteGo(color,currentX,currentY,index,cursorIndex,true);
                     }
                 });
 
