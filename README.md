@@ -30,7 +30,7 @@ LUDO is a **game**(Written in **Java**), which **aims** to work as:
 
 | Platform | Download | Status |
 |----------|----------|--------|
-| Android    |[![Download Button](https://img.shields.io/github/v/release/Shabinder/SpotiFlyer?color=7885FF&label=Android-Apk&logo=android&style=for-the-badge)](https://github.com/subhadiprudra/LUDO/blob/master/app/release/app-release.apk)| ✅ Stable |
+| Android    |[![Download Button](https://img.shields.io/github/v/release/Shabinder/SpotiFlyer?color=7885FF&label=Android-Apk&logo=android&style=for-the-badge)](https://github.com/subhadiprudra/LUDO/raw/master/app/release/app-release.apk)| ✅ Stable |
 
 <!-- [![Latest Download](https://img.shields.io/github/downloads/Shabinder/SpotiFlyer/total?style=for-the-badge&color=17B2E7)](https://github.com/Shabinder/SpotiFlyer/releases/latest) -->
 
@@ -39,16 +39,15 @@ LUDO is a **game**(Written in **Java**), which **aims** to work as:
 Want to contribute? Great!
 All contributions are welcome, from code to documentation to graphics to design suggestions to bug reports. Please use GitHub to its fullest-- contribute Pull Requests, contribute tutorials or other wiki content-- whatever you have to offer, we can use it!
 
- - For **Translations** , read [Contributing.md](https://github.com/Shabinder/SpotiFlyer/blob/main/CONTRIBUTING.md)
+### Contibuting Translations:
 
-**Please Donate to support me and my work!**
-</br>
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/R6R84CS1D)
-</br>
-<a href="https://opencollective.com/spotiflyer/donate">
-    <img src="https://opencollective.com/spotiflyer/tiers/donate.svg?avatarHeight=52">
-</a>
-[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://paypal.me/shabinder)
+ - **Fork** this repo (Button at top Right Corner)
+
+ - **Commit** your Changes to your Fork and then **Create a Pull Request** to this Repo.
+
+ - **Sit Back and Relax** and **kudos** for your contibution 👍 , many people will appreciate your effort. 😄
+
+If Need any Help with Anything create an issue asking about for same.
 
 ### Want to discuss? 💬
 Have any questions, doubts or want to present your opinions, views? You're always welcome. You can [start discussions](https://github.com/Shabinder/SpotiFlyer/discussions).
