@@ -16,20 +16,11 @@
 
 ***Encourage this repo by giving it a Star⭐ .***
 
-SpotiFlyer is an **App**(Written in **Kotlin**), which **aims** to work as:
-  - **Downloads**: Albums, Tracks and Playlists,etc
-  - **Save your Data** ,by not **_Streaming_** your Fav Songs Online again & again(Just Download Them!)
+LUDO is a **game**(Written in **Java**), which **aims** to work as:
+  - A **multiplayer**: game.
+  - A **offline** game
   - **No ADS!**
-  - **Works straight out of the box** and does not require you to generate or mess with your API keys (already included).
 
-### Supported Platforms:
-- Spotify
-- Gaana
-- Youtube
-- Youtube Music
-- Jio-Saavn
-- SoundCloud
-- _(more coming soon)_
 
 <!--START_SECTION:DCI
 <a href="https://github.com/Shabinder/SpotiFlyer/releases/latest"><img src="https://hcti.io/v1/image/53d51dc7-91c7-4b9d-b923-2ea32e6b17ad" height="125" width="280" alt="Total Downloads"></a>
@@ -39,24 +30,10 @@ SpotiFlyer is an **App**(Written in **Kotlin**), which **aims** to work as:
 
 | Platform | Download | Status |
 |----------|----------|--------|
-| Android    |[![Download Button](https://img.shields.io/github/v/release/Shabinder/SpotiFlyer?color=7885FF&label=Android-Apk&logo=android&style=for-the-badge)](https://github.com/Shabinder/SpotiFlyer/releases/download/v3.6.1/SpotiFlyer-3.6.1.apk)| ✅ Stable |
-| Windows    |[![Download Button](https://img.shields.io/github/v/release/Shabinder/SpotiFlyer?color=00A8E8&label=Windows-msi&logo=windows&style=for-the-badge)](https://github.com/Shabinder/SpotiFlyer/releases/download/v3.6.1/SpotiFlyer-3.6.1.msi)| ✅ Stable |
-| Windows-JAR   |[![Download Button](https://img.shields.io/github/v/release/Shabinder/SpotiFlyer?color=00719c&label=Windows-jar&logo=windows&style=for-the-badge)](https://github.com/Shabinder/SpotiFlyer/releases/download/v3.6.1/SpotiFlyer-windows-x64-3.6.1.jar)| ✅ Stable |
-| MacOS-JAR    |[![Download Button](https://img.shields.io/github/v/release/Shabinder/SpotiFlyer?color=5F85CE&label=MacOS-jar&logo=apple&style=for-the-badge)](https://github.com/Shabinder/SpotiFlyer/releases/download/v3.6.1/SpotiFlyer-macos-x64-3.6.1.jar) | ✅ Stable |
-| Linux-DEB    |[![Download Button](https://img.shields.io/github/v/release/Shabinder/SpotiFlyer?color=D0074E&label=Linux-deb&logo=debian&style=for-the-badge)](https://github.com/Shabinder/SpotiFlyer/releases/download/v3.6.1/spotiflyer_3.6.1-1_amd64.deb)| ✅ Stable |
-| Linux-JAR    |[![Download Button](https://img.shields.io/github/v/release/Shabinder/SpotiFlyer?color=EBA201&label=Linux-jar&logo=linux&style=for-the-badge)](https://github.com/Shabinder/SpotiFlyer/releases/download/v3.6.1/SpotiFlyer-linux-x64-3.6.1.jar)| ✅ Stable |
-| Web    |[![Download Button](https://img.shields.io/github/v/release/Shabinder/SpotiFlyer?color=FF7139&label=SpotiFlyer&logo=firefox&style=for-the-badge)](https://shabinder.github.io/SpotiFlyer/) | ⚠️ Beta |
-
-- To run the `jar` version, you need JAVA installed.
-- MacOs DMG is not notarized and signed using a certificate , so Use jar in mac for now.
+| Android    |[![Download Button](https://img.shields.io/github/v/release/Shabinder/SpotiFlyer?color=7885FF&label=Android-Apk&logo=android&style=for-the-badge)](https://github.com/subhadiprudra/LUDO/blob/master/app/release/app-release.apk)| ✅ Stable |
 
 <!-- [![Latest Download](https://img.shields.io/github/downloads/Shabinder/SpotiFlyer/total?style=for-the-badge&color=17B2E7)](https://github.com/Shabinder/SpotiFlyer/releases/latest) -->
 
-<a href="https://f-droid.org/packages/com.shabinder.spotiflyer">
-    <img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
-    alt="Get it on F-Droid"
-    height="110">
-</a>
 
 ### Want to Contribute 🙋‍♂️?
 Want to contribute? Great!
@@ -111,8 +88,5 @@ Credits
  - Some Logos are Based on Logos by [Freepik](https://www.freepik.com/).
 
 
-Disclaimer
-----
-Downloading copyright songs may be illegal in your country. This tool is for educational purposes only and was created only to show how Music Platform's Apis like Spotify's API can be exploited to download music. Please support the artists by buying their music.
 
 
