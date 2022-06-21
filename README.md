@@ -2,6 +2,9 @@
 
 # LUDO Game
 - A **multiplayer** LUDO game for android written in java.
+ **Server side repo**
+ - Server is hosted on heroku and written in nodejs
+ - [See codes](https://github.com/subhadiprudra/LUDO#-install)
 
  **Currently running on:**
  - [Android (Jetpack Compose)](https://github.com/subhadiprudra/LUDO#-install)
@@ -42,42 +45,23 @@ All contributions are welcome, from code to documentation to graphics to design 
 ### Contibuting Translations:
 
  - **Fork** this repo (Button at top Right Corner)
-
  - **Commit** your Changes to your Fork and then **Create a Pull Request** to this Repo.
-
  - **Sit Back and Relax** and **kudos** for your contibution 👍 , many people will appreciate your effort. 😄
 
 If Need any Help with Anything create an issue asking about for same.
 
 ### Want to discuss? 💬
-Have any questions, doubts or want to present your opinions, views? You're always welcome. You can [start discussions](https://github.com/Shabinder/SpotiFlyer/discussions).
+Have any questions, doubts or want to present your opinions, views? You're always welcome. You can [start discussions](https://github.com/subhadiprudra/LUDO/discussions).
 
 ### Todos 📄
- - Write **Tests**.
- - Support for Podcasts/Episodes and Shows.
- - Build a Media Player into this app. [#113](https://github.com/Shabinder/SpotiFlyer/issues/113)
-
-### Note
-The availability of YouTube Music / JioSaavn in your country is important for this app to work. The reason behind this is, we use YouTube Music / JioSaavn to filter out our search results and get the desired song downloaded from Youtube Music OR other providers we may use(like Jio Saavn).
-To check if YouTube Music is available in your country, visit [YouTube Music](https://music.youtube.com).
-
-I am hosting a **server for WEB APP on my own personal device** , so expect some downtimes, If you have a **server** available and would like to share , open an issue or ping me wherever you can get a hold of me.
+ - Work fine on slow network.
+ - Add music and sounds.
+ - Batter UI in home screen
 
 
 ### Permissions Info:
  - **NETWORK**- *(INTERNET, ACCESS_NETWORK_STATE, ACCESS_WIFI_STATE)*: to access the online streaming services, and Confirm Network Connectivity.
- - **STORAGE**- *READ_STORAGE_PERMISSION, READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE, MANAGE_EXTERNAL_STORAGE)*: to save Downloaded Media Files.
- - **QUERY_ALL_PACKAGES**- in order to check if Youtube Music, Spotify, Gaana, JioSaavn, etc apps are installed and if they are, user can directly open them.
- - **REQUEST_IGNORE_BATTERY_OPTIMIZATIONS**: User Allows App to Run in Background at runtime in Permission Dialog.
- - **Wake Lock**: Don't let Wifi/Internet Sleep in screen off / dozing state when Songs are being downloaded.
- - **Foreground Service**: Service responsible to download and save songs to storage even after app is exited/background.
- - **NOTE**: Analytics and Crashlytics are **OPT-IN** *(Disabled by Default)* and are **Self-Hosted**.
 
-License
-![GPL-License](https://img.shields.io/github/license/Shabinder/SpotiFlyer?style=flat-square)
-----
-**GPL-3.0 License**
-This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
 ***Free Software, Hell Yeah!***
 
@@ -85,6 +69,7 @@ This program is free software: you can redistribute it and/or modify it under th
 Credits
 ----
  - Some Logos are Based on Logos by [Freepik](https://www.freepik.com/).
+ - Some animations are based on animations by [Lottie files](https://lottiefiles.com/)
 
 
 
