@@ -6,7 +6,9 @@ import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -24,13 +26,20 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.util.HashMap;
 import java.util.Random;
 
+import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
+
 public class CreateTable extends AppCompatActivity {
     private FirebaseAuth mAuth;
-    ImageView dpView;
-    TextView name;
+
+    EditText name;
+    Button save;
     String tableCodeToJoin,tableCodeCreated;
 
     TextView joinBtn,createBtn,tableCodeTv,joinList;
@@ -38,20 +47,28 @@ public class CreateTable extends AppCompatActivity {
     EditText editText;
     int i=0;
 
-    FirebaseUser user;
-    CardView start,joinGame;
+
+    CardView start;
+    Button joinGame;
     int playerCount=0;
-    DatabaseReference reference;
+
     int c=0;
     Loading loading;
+    Socket socket;
+    String tableCode="";
+    int myIndex;
+    int joinPlayerCount=0;
+    Pref pref;
+
+    JSONArray playernames;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_table);
 
-        dpView=findViewById(R.id.dp);
-        name=findViewById(R.id.nameTv);
+
+        name=findViewById(R.id.name);
         joinBtn =findViewById(R.id.join_btn);
         createBtn = findViewById(R.id.create_btn);
         joinLayout = findViewById(R.id.join_layout);
@@ -61,12 +78,31 @@ public class CreateTable extends AppCompatActivity {
         joinList=findViewById(R.id.join_list);
         joinGame =findViewById(R.id.join);
         editText=findViewById(R.id.code_et);
+        save = findViewById(R.id.save);
+        pref = new Pref(this);
+        playernames= new JSONArray();
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!name.getText().toString().equals("")) {
+                    pref.write("name", name.getText().toString());
+                    Toast.makeText(CreateTable.this, "Name saved", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        if(pref.read("name").equals("null")){
+            name.setText("");
+        }else{
+            name.setText(pref.read("name"));
+        }
 
 
-        mAuth = FirebaseAuth.getInstance();
-        user = mAuth.getCurrentUser();
-        Picasso.with(this).load(user.getPhotoUrl()).into(dpView);
-        name.setText(user.getDisplayName());
+
+
+        socket = App.getSocket();
+        socket.connect();
 
         loading = new Loading(this);
 
@@ -91,10 +127,10 @@ public class CreateTable extends AppCompatActivity {
                 joinLayout.setVisibility(View.GONE);
                 createLayout.setVisibility(View.VISIBLE);
                 if(i==0){
-                    String tableCode = getRandomNumberString();
+                    tableCode = getRandomNumberString();
                     tableCodeTv.setText(tableCode);
-                    createTable(tableCode);
                     loading.show();
+                    socket.emit("join",tableCode+"",name.getText().toString());
                 }
                 i=1;
             }
@@ -105,10 +141,9 @@ public class CreateTable extends AppCompatActivity {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(playerCount>0){
-                    reference.child("action").setValue("start");
-                }else {
-                    Toast.makeText(CreateTable.this, "No one joined", Toast.LENGTH_SHORT).show();
+
+                if(playerCount>1){
+                    goToGame();
                 }
             }
         });
@@ -119,58 +154,90 @@ public class CreateTable extends AppCompatActivity {
         joinGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!editText.getText().toString().equals("")){
-                    tableCodeToJoin = editText.getText().toString();
-                    loading.show();
+                if(!name.getText().toString().equals("")) {
+                    if (!editText.getText().toString().equals("")) {
+                        tableCodeToJoin = editText.getText().toString();
+                        loading.show();
+                        socket.emit("join", tableCodeToJoin + "",name.getText().toString());
+                    } else {
+                        Toast.makeText(CreateTable.this, "Enter table code", Toast.LENGTH_SHORT).show();
+                    }
+                }else{
+                    Toast.makeText(CreateTable.this, "Enter your name", Toast.LENGTH_SHORT).show();
+                }
 
+            }
+        });
 
-                    FirebaseDatabase.getInstance().getReference().child("pwf").child(tableCodeToJoin).child("joined").addListenerForSingleValueEvent(new ValueEventListener() {
+        socket.on("on_join", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                String room = (String) args[0];
+
+                Log.i("count__",room+" "+joinPlayerCount);
+
+                if(room.equals(tableCodeToJoin)){
+                    joinPlayerCount = (int) args[1];
+                }else if(room.equals(tableCode)) {
+                    playerCount  = (int) args[1];
+                    playernames.put((String) args[2]);
+
+                    runOnUiThread(new Runnable() {
                         @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            c=0;
-                            String emails="";
-                            for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                                String email = dataSnapshot.child("email").getValue(String.class);
-                                emails= emails+email+"\n";
-                                c++;
+                        public void run() {
+                            String text="Total player count : " + playerCount;
+                            for(int i=0;i<playernames.length();i++){
+                                try {
+                                    text = text+"\n"+playernames.getString(i);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                             }
-
-                            if(c==0 || emails.contains(user.getEmail())  || c>4){
-                                Toast.makeText(CreateTable.this, "Wrong code", Toast.LENGTH_SHORT).show();
-                            }else {
-
-                                reference=FirebaseDatabase.getInstance().getReference().child("pwf").child(editText.getText().toString());
-                                HashMap<String,String> map = new HashMap<>();
-                                map.put("name",user.getDisplayName());
-                                map.put("email",user.getEmail());
-                                map.put("uid",user.getUid());
-                                map.put("playerNum","0");
-                                map.put("step","0");
-                                map.put("cursor","0");
-
-                                reference.child("joined").child(user.getUid()).setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        loading.dismiss();
-                                        addStartListener();
-
-                                    }
-                                });
-
-                            }
-
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
+                            joinList.setText(text);
+                            loading.dismiss();
                         }
                     });
-
-
-                }else {
-                    Toast.makeText(CreateTable.this, "Enter your code", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        socket.on("msg", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                String msg  = (String) args[0];
+                Log.i("msg__",msg);
+                if(msg.equals("joined")){
+                    myIndex = (int)args[1];
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            loading.dismiss();
+                            joinGame.setText("Joined");
+                            joinGame.setClickable(false);
+                        }
+                    });
+                }
+                else if(msg.equals("start_game")){
+
+                }
+
+            }
+        });
+
+        socket.on("start", new Emitter.Listener() {
+            @Override
+            public void call(final Object... args) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intent = new Intent(CreateTable.this,PlayWithFriends.class);
+                        intent.putExtra("code",tableCodeToJoin);
+                        intent.putExtra("count",joinPlayerCount);
+                        intent.putExtra("myIndex",myIndex);
+                        intent.putExtra("names",(String)args[0]);
+                        startActivity(intent);
+                    }
+                });
             }
         });
 
@@ -187,72 +254,22 @@ public class CreateTable extends AppCompatActivity {
     }
 
 
-    void createTable(String code){
-
-        tableCodeCreated=code;
-        reference=FirebaseDatabase.getInstance().getReference().child("pwf").child(code);
-
-        HashMap<String,String> map = new HashMap<>();
-        map.put("name",user.getDisplayName());
-        map.put("email",user.getEmail());
-        map.put("uid",user.getUid());
-        map.put("playerNum","0");
-        map.put("step","0");
-        map.put("cursor","0");
-
-        reference.child("joined").child(user.getUid()).setValue(map);
-        reference.child("action").setValue("stop");
-        reference.child("steps").setValue("0");
-
-        reference.child("joined").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                playerCount=0;
-                String names="joined players : \n";
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    String name = dataSnapshot.child("name").getValue(String.class);
-                    names= names+name+"\n";
-                    playerCount++;
-                    String uid= dataSnapshot.child("uid").getValue(String.class);
-                    reference.child("joined").child(uid).child("playerNum").setValue(playerCount+"");
-                }
-                joinList.setText(names);
-                loading.dismiss();
-                Toast.makeText(CreateTable.this, "Table create", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
 
+    void goToGame(){
+        if(!name.getText().toString().equals("")) {
+            socket.emit("start",playernames.toString());
+            Intent intent = new Intent(CreateTable.this, PlayWithFriends.class);
+            intent.putExtra("code", tableCode);
+            intent.putExtra("count", playerCount);
+            intent.putExtra("myIndex", myIndex);
+            intent.putExtra("names",playernames.toString());
+            startActivity(intent);
+        }else {
+            Toast.makeText(this, "Enter your name", Toast.LENGTH_SHORT).show();
+        }
     }
 
-    void goToGame(String code){
-        Intent intent = new Intent(CreateTable.this,MainActivity.class);
-        intent.putExtra("code",code);
-        startActivity(intent);
-    }
-
-    void addStartListener(){
-
-        reference.child("action").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.getValue(String.class).equals("start")){
-                    goToGame(tableCodeCreated);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-    }
 
 
 }

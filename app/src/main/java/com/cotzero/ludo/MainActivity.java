@@ -1,5 +1,7 @@
 package com.cotzero.ludo;
 
+import static com.cotzero.ludo.App.MyApp;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +32,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
 
 public class MainActivity extends AppCompatActivity implements Listener, com.cotzero.ludo.interfaces.CountDown, MainCountDownListener {
 
@@ -68,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements Listener, com.cot
 
     int steps=0;
     int turnColor =1;
-    int playerCount=2;
+    int playerCount=4;
     int myColor;
 
     Boolean canDiceRoll = true;
@@ -86,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements Listener, com.cot
     Boolean isCut=false;
     MainCountDown mainCountDown;
     TextView minTv,secTv;
+    Socket socket;
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -95,7 +101,8 @@ public class MainActivity extends AppCompatActivity implements Listener, com.cot
         setContentView(R.layout.activity_main);
 
         tableCode= getIntent().getStringExtra("code");
-//        reference = FirebaseDatabase.getInstance().getReference().child("pwf").child(tableCode);
+        socket = App.getSocket();
+        socket.connect();
 
         random = new Random();
         board= findViewById(R.id.board);
@@ -279,11 +286,13 @@ public class MainActivity extends AppCompatActivity implements Listener, com.cot
                     randomNumber=randomNumber+1;
                    // reference.child("steps").setValue(randomNumber+"");
                     rollTheDice(randomNumber);
-
                 }
 
             }
         });
+
+
+
 
         /*reference.child("steps").addValueEventListener(new ValueEventListener() {
             @Override
@@ -336,6 +345,16 @@ public class MainActivity extends AppCompatActivity implements Listener, com.cot
         countDown1.startCountDown();
         mainCountDown.start();
 
+        socket.on("rollTheDice", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+
+                String a = (String) args[0];
+                rollTheDice(Integer.parseInt(a));
+
+            }
+        });
+
     }
 
     void changeTurn(){
@@ -357,7 +376,6 @@ public class MainActivity extends AppCompatActivity implements Listener, com.cot
             }
 
         }else if(playerCount==4) {
-
             if(turnColor == 1){
                 turnColor=2;
             }else if(turnColor == 2){

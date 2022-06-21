@@ -38,13 +38,13 @@ public class CountDown {
                 }
 
 
-                for(i=100;i>=0;i--){
+                for(i=200;i>=0;i--){
 
                     if(shouldStop){
                         break;
                     }
 
-                    final int finalI = i;
+                    final int finalI = i/2;
                     handler.post(new Runnable() {
                         @Override
                         public void run() {

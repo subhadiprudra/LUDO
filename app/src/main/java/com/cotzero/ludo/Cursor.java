@@ -197,48 +197,47 @@ public class Cursor {
 
     void go(final int count){
 
-        if(canCursorGo) {
 
 
-            changeListener.onBeforeGo(color, currentX, currentY, index, cursorIndex,false);
+        changeListener.onBeforeGo(color, currentX, currentY, index, cursorIndex,false);
 
 
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
 
-                    for(int i =1;i<=count;i++){
-
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                if (positionModels.size() - 1 > index) {
-                                    index = index + 1;
-                                    changeLocationByIndex(index);
-                                    changeListener.onPositionChange(index);
-                                }
-
-                            }
-                        });
-
-                        try {
-                            Thread.sleep(200);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
+                for(int i =1;i<=count;i++){
 
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            changeListener.onCompleteGo(color, currentX, currentY, index, cursorIndex,false);
+                            if (positionModels.size() - 1 > index) {
+                                index = index + 1;
+                                changeLocationByIndex(index);
+                                changeListener.onPositionChange(index);
+                            }
+
                         }
                     });
+
+                    try {
+                        Thread.sleep(200);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
-            }).start();
+
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        changeListener.onCompleteGo(color, currentX, currentY, index, cursorIndex,false);
+                    }
+                });
+            }
+        }).start();
 
 
-        }
+
 
 
     }
