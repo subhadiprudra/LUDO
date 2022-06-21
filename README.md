@@ -1,4 +1,4 @@
-<a href="https://github.com/subhadiprudra/LUDO"><img src="https://github.com/Shabinder/SpotiFlyer/blob/Compose/art/SpotiFlyer.svg" align="left" height="80" width="80" ></a>
+<a href="https://github.com/subhadiprudra/LUDO"><img src="https://github.com/subhadiprudra/LUDO/blob/master/images/dices.png" align="left" height="80" width="80" ></a>
 
 # LUDO Game
 
