@@ -1,11 +1,12 @@
 <a href="https://github.com/subhadiprudra/LUDO"><img src="https://github.com/Shabinder/SpotiFlyer/blob/Compose/art/SpotiFlyer.svg" align="left" height="80" width="80" ></a>
 
 # LUDO Game
+
  - A **multiplayer** LUDO game for android written in java.
 
  **Server side repo**
  - Server is hosted on heroku and written in nodejs
- - [See codes](https://github.com/subhadiprudra/LUDO#-install)
+ - [See codes](https://github.com/subhadiprudra/ludo_server)
 
  **Currently running on:**
  - [Android (Jetpack Compose)](https://github.com/subhadiprudra/LUDO#-install)
