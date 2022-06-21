@@ -10,9 +10,9 @@
 ![API](https://img.shields.io/badge/API-26%2B-brightgreen.svg)
 </br>-->
 
-[![GitHub stars](https://img.shields.io/github/stars/Shabinder/SpotiFlyer?style=social)](https://github.com/subhadiprudra/LUDO/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/Shabinder/SpotiFlyer?style=social)](https://github.com/subhadiprudra/LUDO/network/members)
-[![GitHub watchers](https://img.shields.io/github/watchers/Shabinder/SpotiFlyer?style=social)](https://github.com/subhadiprudra/LUDO/watchers)
+[![GitHub stars](https://img.shields.io/github/stars/subhadiprudra/LUDO?style=social)](https://github.com/subhadiprudra/LUDO/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/subhadiprudra/LUDO?style=social)](https://github.com/subhadiprudra/LUDO/network/members)
+[![GitHub watchers](https://img.shields.io/github/watchers/subhadiprudra/LUDO?style=social)](https://github.com/subhadiprudra/LUDO/watchers)
 
 ***Encourage this repo by giving it a Star⭐ .***
 
